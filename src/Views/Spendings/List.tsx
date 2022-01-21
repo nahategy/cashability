@@ -1,19 +1,13 @@
-import {getLocalSpendings} from "../../Services/Spendings";
-import {useEffect, useState} from "react";
-import {Spending} from "../../Types";
 import SpendingItem from "../../Components/Spending/Spending";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
 
 function List() {
-    const [spendings, setSpendings] = useState([] as Spending[]);
-
-    useEffect(() => {
-        setSpendings(getLocalSpendings());
-    }, []);
-
+    const spendings = useSelector((state: RootState) => state.spendings.spendings)
     return (
         <div>
             {spendings.map((value) => (
-                <SpendingItem {...value} />
+                <SpendingItem {...value} key={value.id}/>
             ))}
         </div>
     )

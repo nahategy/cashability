@@ -4,25 +4,32 @@ import {BrowserRouter as Router} from "react-router-dom";
 import Routing from "./Components/Routing";
 import LoadingBar from "./Components/LoadingBar";
 import Menu from "./Components/Menu";
-import {recordUnsentSpendingsInAPI} from "./Services/Spendings";
+import {getLocalSpendings, recordUnsentSpendingsInAPI} from "./Services/Spendings";
+import {useDispatch} from "react-redux";
+import {set} from "./GlobalState/SpendingSlice";
 
 // import {SpendingRecordContext} from "./Contexts/SpendingRecords";
 
 function App() {
-    const [isUnRecordedSendingsSentToAPI, setIsUnRecordedSendingsSentToAPI] = useState(false);
+    const [isUnRecordedSpendingsSentToAPI, setIsUnRecordedSpendingsSentToAPI] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!isUnRecordedSendingsSentToAPI)
+        dispatch(set(getLocalSpendings()));
+    }, []);
+
+    useEffect(() => {
+        if (!isUnRecordedSpendingsSentToAPI)
             setTimeout(() => {
                 recordUnsentSpendingsInAPI().finally(() => {
-                    setIsUnRecordedSendingsSentToAPI(true);
+                    setIsUnRecordedSpendingsSentToAPI(true);
                 })
             }, 1500);
     }, []);
 
     return (
         <div>
-            {!isUnRecordedSendingsSentToAPI ? (<LoadingBar/>) : ""}
+            {!isUnRecordedSpendingsSentToAPI ? (<LoadingBar/>) : ""}
             <Router>
                 <Menu/>
                 <div className="page">

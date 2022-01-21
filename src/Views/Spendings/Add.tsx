@@ -1,19 +1,34 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {recordSpending} from "../../Services/Spendings";
+import {useDispatch} from "react-redux";
+import {add} from "../../GlobalState/SpendingSlice";
+import Spending from "../../Components/Spending/Spending";
+import {Spending as SpendingType} from "../../Types";
 
 function Add() {
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [amount, setAmount] = useState("0");
-    const [date, setDate] = useState("");
-    // const [type, setType] = useState();
+    const [date, setDate] = useState(undefined as any);
+
+    const dispatch = useDispatch();
 
     const [recording, setRecording] = useState(false);
 
     const RecordSpending = () => {
         setRecording(true);
-        recordSpending({"name": name, "amount": parseFloat(amount), "date": new Date(date)})
+
+        if (!date)
+            setDate(new Date());
+
+        const sp: SpendingType = {
+            "name": name, "amount": parseFloat(amount), "date": date
+        };
+
+        recordSpending(sp)
+        dispatch(add(sp))
+
         navigate("/");
     };
 
