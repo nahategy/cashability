@@ -4,7 +4,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 import Routing from "./Components/Routing";
 import LoadingBar from "./Components/LoadingBar";
 import Menu from "./Components/Menu";
-import {getLocalSpendings, recordUnsentSpendingsInAPI} from "./Services/Spendings";
+import {getLocalSpendingResponse, recordUnsentSpendingsInAPI} from "./Services/Spendings";
 import {useDispatch} from "react-redux";
 import {set} from "./GlobalState/SpendingSlice";
 
@@ -15,7 +15,7 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(set(getLocalSpendings()));
+        dispatch(set(getLocalSpendingResponse()));
     }, []);
 
     useEffect(() => {

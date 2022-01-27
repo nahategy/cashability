@@ -1,4 +1,4 @@
-type Spending = {
+export type Spending = {
     name: string,
     amount: number,
     date: Date
@@ -6,6 +6,17 @@ type Spending = {
     id?: string
 }
 
-export type {
-    Spending,
+
+/*
+* {
+*   "2021-12":{
+*       .....
+*   },
+*   "2022-01":{
+*       .....
+*   },
+* }
+* */
+export type SpendingResponse = {
+    [key: string]: Spending[]
 }

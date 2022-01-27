@@ -1,36 +1,37 @@
 import {LOCAL_STORAGE} from "../../Constants";
-import {Spending} from "../../Types";
+import {Spending, SpendingResponse} from "../../Types";
+import {dateToYYMM} from "../../Utils";
 
 const storage = window.localStorage;
 
-function getStorageItemOrDefault(name: string, def: any): any {
+function getStorageItemOrDefault(name: string, def: any): typeof def {
     let item = JSON.parse(storage.getItem(name) as string)
     if (item === null) {
-        item = [];
+        item = def;
     }
     return item;
 }
 
-function getLocalSpendings(): Spending[] {
-    return getStorageItemOrDefault(LOCAL_STORAGE.spendings, []) as Spending[];
+function getLocalSpendingResponse(): SpendingResponse {
+    return getStorageItemOrDefault(LOCAL_STORAGE.spendings, {});
 }
 
 function recordSpending(spending: Spending) {
-    const spendings = getLocalSpendings();
-    if (!spending.date) {
-        spending.date = new Date();
-    }
-
-    storage.setItem(LOCAL_STORAGE.spendings, JSON.stringify([...spendings, spending]))
+    const spendingResponse: SpendingResponse = getLocalSpendingResponse();
+    const date = dateToYYMM(spending.date);
+    if (!spendingResponse[date])
+        spendingResponse[date] = []
+    spendingResponse[date].push(spending)
+    storage.setItem(LOCAL_STORAGE.spendings, JSON.stringify(spendingResponse))
 }
 
 async function recordUnsentSpendingsInAPI() {
-    const spendings = getLocalSpendings();
-    spendings.forEach((currentSpending) => {
-        if (currentSpending.id != null)
-            return;
-        console.log("TODO: record spending in API")
-    });
+    const spendingResponse = getLocalSpendingResponse();
+    const keys: string[] = Object.keys(spendingResponse)
+    keys.forEach((value) => {
+        const spendings: Spending[] = spendingResponse[value];
+    })
+
 }
 
-export {recordSpending, recordUnsentSpendingsInAPI, getLocalSpendings};
+export {recordSpending, recordUnsentSpendingsInAPI, getLocalSpendingResponse};

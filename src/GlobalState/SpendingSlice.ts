@@ -1,32 +1,35 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {Spending} from "../Types";
+import {SpendingResponse, Spending} from "../Types";
 
 type SpendingPayload = {
     payload: Spending
 };
 
-type SpendingArrayPayload = {
-    payload: Spending[]
+type SpendingResponsePayload = {
+    payload: SpendingResponse
 }
 
 export const SpendingSlice = createSlice({
     name: 'spendings',
     initialState: {
-        spendings: [] as Spending[]
+        spendings: {} as SpendingResponse
     },
+
     reducers: {
-        set: (state, action: SpendingArrayPayload) => {
+        set: (state, action: SpendingResponsePayload) => {
+            console.log(action.payload)
             state.spendings = action.payload
         },
         add: (state, action: SpendingPayload) => {
-            state.spendings.push(action.payload)
+            // state.spendings.
+            // state.spendings.findIndex((value) => (value.)).push(action.payload)
         },
         remove: (state, action: SpendingPayload) => {
-            state.spendings = state.spendings.filter((spending: Spending) => spending.id !== action.payload.id)
+            // state.spendings = state.spendings.filter((spending: Spending) => spending.id !== action.payload.id)
         },
         update: (state, action: SpendingPayload) => {
-            const id = state.spendings.findIndex((spending) => spending.id = action.payload.id);
-            state.spendings[id] = action.payload;
+            // const id = state.spendings.findIndex((spending) => spending.id = action.payload.id);
+            // state.spendings[id] = action.payload;
         }
     }
 });

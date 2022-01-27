@@ -10,7 +10,7 @@ function Routing() {
         <Routes>
             <Route path="/" element={<Overview/>}/>
             <Route path="/spendings/add" element={<Add/>}/>
-            <Route path="/spendings/" element={<List/>}/>
+            <Route path="/spendings/" element={<List month={"2021-12"}/>}/>
             <Route path="*" element={<Error404/>}/>
         </Routes>
     )

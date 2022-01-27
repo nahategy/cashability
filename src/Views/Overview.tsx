@@ -1,25 +1,20 @@
 import {useSelector} from "react-redux";
 import {RootState} from "../store";
-import {Spending} from "../Types";
+import {Spending, SpendingResponse} from "../Types";
+import {getCurrentYYMM} from "../Utils";
 
 function Overview() {
-    const spendings: Spending[] = useSelector((state: RootState) => state.spendings.spendings)
-    let types = [...new Set(spendings.map(item => (item.type)))];
-
-    const typeValues: number[] = [];
-    types.forEach((type_name: string, idx) => {
-        const v: Spending[] = spendings.filter((spending) => (spending.type === type_name));
-        typeValues[idx] = v.reduce((previousValue, spending) => (previousValue + spending.amount), 0)
-    })
-
+    const spendingResponse: SpendingResponse = useSelector((state: RootState) => state.spendings.spendings)
+    const date = getCurrentYYMM();
+    const spendings: Spending[] = spendingResponse[date] ?? [];
     return (
-        <div>
-            {types.map((value: any, idx) => (
-                <div key={idx}>
-                    {value} {typeValues[idx]}
-                </div>
+        <ul>
+            {spendings.map(spending => (
+                <li key={spending.id ?? `${spending.name}.${spending.amount}.${spending.date}`}>
+                    <b>{spending.type}</b> {spending.name}: {spending.amount}
+                </li>
             ))}
-        </div>
+        </ul>
     )
 
 }

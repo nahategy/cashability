@@ -14,7 +14,6 @@ self.addEventListener('fetch', function (event) {
         fetch(event.request)
             .then((networkResponse) => {
                 return caches.open('v1').then((cache) => {
-                    console.log('cached', event.request)
                     cache.put(event.request, networkResponse.clone());
                     return networkResponse;
                 })

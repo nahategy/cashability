@@ -1,9 +1,16 @@
 import SpendingItem from "../../Components/Spending/Spending";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
+import {Spending} from "../../Types";
 
-function List() {
-    const spendings = useSelector((state: RootState) => state.spendings.spendings)
+export type ListProps = {
+    month: string
+}
+
+function List(props: ListProps) {
+    const spendingResponse = useSelector((state: RootState) => state.spendings.spendings)
+    const spendings: Spending[] = spendingResponse[props.month] ?? [];
+
     return (
         <div>
             {spendings.map((value) => (
