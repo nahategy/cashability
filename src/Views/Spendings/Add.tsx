@@ -27,11 +27,7 @@ function Add() {
         const sp: SpendingType = {
             "name": name, "amount": parseFloat(amount), "date": spendingDate
         };
-        console.log(sp);
-
-        recordSpending(sp)
         dispatch(add(sp))
-
         navigate("/");
     };
 
