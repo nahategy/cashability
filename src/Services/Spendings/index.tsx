@@ -13,7 +13,7 @@ function getStorageItemOrDefault(name: string, def: any): typeof def {
 }
 
 function getLocalSpendingResponse(): SpendingResponse {
-    return getStorageItemOrDefault(LOCAL_STORAGE.spendings, {});
+    return getStorageItemOrDefault(LOCAL_STORAGE.spendingResponse, {});
 }
 
 function recordSpending(spending: Spending) {
@@ -22,7 +22,7 @@ function recordSpending(spending: Spending) {
     if (!spendingResponse[date])
         spendingResponse[date] = []
     spendingResponse[date].push(spending)
-    storage.setItem(LOCAL_STORAGE.spendings, JSON.stringify(spendingResponse))
+    storage.setItem(LOCAL_STORAGE.spendingResponse, JSON.stringify(spendingResponse))
 }
 
 async function recordUnsentSpendingsInAPI() {

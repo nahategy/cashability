@@ -3,8 +3,9 @@ import {SpendingReducer} from "./GlobalState/SpendingSlice";
 
 const store = configureStore({
     reducer: {
-        spendings: SpendingReducer
+        spendingResponse: SpendingReducer
     },
+    middleware: (getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false}))
 });
 
 

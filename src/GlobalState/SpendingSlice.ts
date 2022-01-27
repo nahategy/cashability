@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {SpendingResponse, Spending} from "../Types";
+import {dateToYYMM} from "../Utils";
 
 type SpendingPayload = {
     payload: Spending
@@ -12,17 +13,19 @@ type SpendingResponsePayload = {
 export const SpendingSlice = createSlice({
     name: 'spendings',
     initialState: {
-        spendings: {} as SpendingResponse
+        spendingResponse: {} as SpendingResponse
     },
 
     reducers: {
         set: (state, action: SpendingResponsePayload) => {
-            console.log(action.payload)
-            state.spendings = action.payload
+            state.spendingResponse = action.payload
         },
         add: (state, action: SpendingPayload) => {
             // state.spendings.
-            // state.spendings.findIndex((value) => (value.)).push(action.payload)
+            const spendingDate: string = dateToYYMM(action.payload.date);
+            if (!state.spendingResponse[spendingDate])
+                state.spendingResponse[spendingDate] = [];
+            state.spendingResponse[spendingDate].push(action.payload)
         },
         remove: (state, action: SpendingPayload) => {
             // state.spendings = state.spendings.filter((spending: Spending) => spending.id !== action.payload.id)

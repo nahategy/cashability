@@ -8,7 +8,7 @@ export type ListProps = {
 }
 
 function List(props: ListProps) {
-    const spendingResponse = useSelector((state: RootState) => state.spendings.spendings)
+    const spendingResponse = useSelector((state: RootState) => state.spendingResponse.spendingResponse)
     const spendings: Spending[] = spendingResponse[props.month] ?? [];
 
     return (

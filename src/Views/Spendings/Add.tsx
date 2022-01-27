@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import {recordSpending} from "../../Services/Spendings";
 import {useDispatch} from "react-redux";
 import {add} from "../../GlobalState/SpendingSlice";
-import Spending from "../../Components/Spending/Spending";
 import {Spending as SpendingType} from "../../Types";
 
 function Add() {
@@ -19,12 +18,16 @@ function Add() {
     const RecordSpending = () => {
         setRecording(true);
 
-        if (!date)
-            setDate(new Date());
+        var spendingDate = date;
+        if (spendingDate === undefined) {
+            console.log("setting default date");
+            spendingDate = new Date();
+        }
 
         const sp: SpendingType = {
-            "name": name, "amount": parseFloat(amount), "date": date
+            "name": name, "amount": parseFloat(amount), "date": spendingDate
         };
+        console.log(sp);
 
         recordSpending(sp)
         dispatch(add(sp))
