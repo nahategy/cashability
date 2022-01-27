@@ -1,16 +1,7 @@
 import {LOCAL_STORAGE} from "../../Constants";
 import {Spending, SpendingResponse} from "../../Types";
 import {dateToYYMM} from "../../Utils";
-
-const storage = window.localStorage;
-
-function getStorageItemOrDefault(name: string, def: any): typeof def {
-    let item = JSON.parse(storage.getItem(name) as string)
-    if (item === null) {
-        item = def;
-    }
-    return item;
-}
+import {getStorageItemOrDefault, storeItem} from "../LocalStorage";
 
 function getLocalSpendingResponse(): SpendingResponse {
     return getStorageItemOrDefault(LOCAL_STORAGE.spendingResponse, {});
@@ -22,7 +13,7 @@ function recordSpending(spending: Spending) {
     if (!spendingResponse[date])
         spendingResponse[date] = []
     spendingResponse[date].push(spending)
-    storage.setItem(LOCAL_STORAGE.spendingResponse, JSON.stringify(spendingResponse))
+    storeItem(LOCAL_STORAGE.spendingResponse, spendingResponse)
 }
 
 async function recordUnsentSpendingsInAPI() {
