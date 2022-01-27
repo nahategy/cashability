@@ -1,9 +1,11 @@
 const storage = window.localStorage;
 
 function getStorageItemOrDefault(name: string, def: any, pre_parse_mutator?: CallableFunction, post_parse_mutator?: CallableFunction): typeof def {
-    let item = JSON.parse(storage.getItem(name) as string)
-    if (item === null) {
-        item = def;
+    let item = def;
+    try {
+        item = JSON.parse(storage.getItem(name) as string)
+    } catch (e) {
+        console.error(e);
     }
     if (post_parse_mutator)
         return post_parse_mutator(item)
@@ -11,7 +13,11 @@ function getStorageItemOrDefault(name: string, def: any, pre_parse_mutator?: Cal
 }
 
 function storeItem(name: string, value: any) {
-    storage.setItem(name, JSON.stringify(value))
+    try {
+        storage.setItem(name, JSON.stringify(value))
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 export {getStorageItemOrDefault, storeItem}

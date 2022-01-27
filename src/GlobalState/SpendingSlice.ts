@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {SpendingResponse, Spending} from "../Types";
 import {dateToYYMM} from "../Utils";
+import {getLocalSpendingResponse} from "../Services/Spendings";
 
 type SpendingPayload = {
     payload: Spending
@@ -13,7 +14,7 @@ type SpendingResponsePayload = {
 export const SpendingSlice = createSlice({
     name: 'spendings',
     initialState: {
-        spendingResponse: {} as SpendingResponse
+        spendingResponse: getLocalSpendingResponse()
     },
 
     reducers: {
