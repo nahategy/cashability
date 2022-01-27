@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {SpendingReducer} from "./GlobalState/SpendingSlice";
+import {SpendingTypeReducer} from "./GlobalState/SpendingTypeSlice";
 
 const store = configureStore({
     reducer: {
-        spendingResponse: SpendingReducer
+        spendingResponse: SpendingReducer,
+        spendingTypeResponse: SpendingTypeReducer
     },
     middleware: (getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false}))
 });

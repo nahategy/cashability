@@ -7,16 +7,19 @@ export type Spending = {
 }
 
 
-/*
-* {
-*   "2021-12":{
-*       .....
-*   },
-*   "2022-01":{
-*       .....
-*   },
-* }
-* */
 export type SpendingResponse = {
+    /*
+    * {
+    *   "2021-12":{
+    *       .....
+    *   },
+    *   "2022-01":{
+    *       .....
+    *   },
+    * }
+    * */
     [key: string]: Spending[]
 }
+
+export type SpendingType = {}
+export type SpendingTypeResponse = [SpendingType]
