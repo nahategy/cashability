@@ -4,12 +4,12 @@ An SPA to keep track of your spendings
 
 ## Features list:
 
-- Record spending
-    - Name
+- Record spending [x]
+    - Name 
     - Amount
     - Date ( optional )
 - Load spendings by
-    - Month
+    - Month [x]
     - Type
 - Record spending limit
     - Limit
@@ -18,7 +18,7 @@ An SPA to keep track of your spendings
 
 ## Nice to have
 
-- Keep application in service worker!
+- Keep application in service worker! [x]
 
 ## Done
 
