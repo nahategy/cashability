@@ -4,9 +4,12 @@ function getStorageItemOrDefault(name: string, def: any, pre_parse_mutator?: Cal
     let item = def;
     try {
         item = JSON.parse(storage.getItem(name) as string)
+        if (!item)
+            item = def
     } catch (e) {
         console.error(e);
     }
+
     if (post_parse_mutator)
         return post_parse_mutator(item)
     return item;
