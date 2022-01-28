@@ -16,7 +16,6 @@ store.subscribe(() => {
     const keys: any[] = Object.keys(currentState);
     keys.forEach((key) => {
         const value: any = currentState[key][key];
-        console.log(value)
         storeItem(key, value)
     })
 })
