@@ -1,6 +1,5 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {recordSpending} from "../../Services/Spendings";
 import {useDispatch} from "react-redux";
 import {add} from "../../GlobalState/SpendingSlice";
 import {Spending as SpendingType} from "../../Types";
