@@ -6,7 +6,8 @@ const API_ROUTES = {
     "RecordSpending": "/spendings/record",
 };
 const LOCAL_STORAGE = {
-    "spendingResponse": "spendingResponse"
+    "spendingResponse": "spendingResponse",
+    "localSpendingCount": "localSpendingCount"
 };
 
 export {
