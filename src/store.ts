@@ -1,12 +1,14 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {SpendingReducer} from "./GlobalState/SpendingSlice";
 import {SpendingTypeReducer} from "./GlobalState/SpendingTypeSlice";
+import {LocalSpendingCountReducer} from "./GlobalState/LocalSpendingCountSlice";
 import {storeItem} from "./Services/LocalStorage";
 
 const store = configureStore({
     reducer: {
         spendingResponse: SpendingReducer,
-        spendingTypeResponse: SpendingTypeReducer
+        spendingTypeResponse: SpendingTypeReducer,
+        localSpendingCount: LocalSpendingCountReducer,
     },
     middleware: (getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false}))
 });
