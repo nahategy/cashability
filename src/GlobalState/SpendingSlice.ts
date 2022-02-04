@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {SpendingResponse, Spending} from "../Types";
-import {dateToYYMM} from "../Utils";
-import {getLocalSpendingResponse} from "../Services/Spendings";
+import {dateToYYMM, stringToDate} from "../Utils";
+import {getLocalSpendingResponse,} from "../Services/Spendings";
 
 type SpendingPayload = {
     payload: Spending
@@ -14,7 +14,7 @@ type SpendingResponsePayload = {
 export const SpendingSlice = createSlice({
     name: 'spendings',
     initialState: {
-        spendingResponse: getLocalSpendingResponse()
+        spendingResponse: getLocalSpendingResponse(),
     },
 
     reducers: {
@@ -23,13 +23,20 @@ export const SpendingSlice = createSlice({
         },
         add: (state, action: SpendingPayload) => {
             // state.spendings.
+            if (!action.payload.id) {
+                // state.spendingCounter--;
+                // action.payload.id = state.spendingCounter + ""
+            }
             const spendingDate: string = dateToYYMM(action.payload.date);
             if (!state.spendingResponse[spendingDate])
                 state.spendingResponse[spendingDate] = [];
             state.spendingResponse[spendingDate].push(action.payload)
         },
         remove: (state, action: SpendingPayload) => {
-            // state.spendings = state.spendings.filter((spending: Spending) => spending.id !== action.payload.id)
+            console.log("remove spending reducer")
+            const spendingDate: string = dateToYYMM(stringToDate(action.payload.date.toString()));
+            // const index = state.spendingResponse[spendingDate].findIndex((sp: Spending) => sp.id === action.payload.id);
+            state.spendingResponse[spendingDate] = state.spendingResponse[spendingDate].filter((sp: Spending) => (sp.id !== action.payload.id))
         },
         update: (state, action: SpendingPayload) => {
             // const id = state.spendings.findIndex((spending) => spending.id = action.payload.id);
