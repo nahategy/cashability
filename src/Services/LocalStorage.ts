@@ -7,6 +7,7 @@ function getStorageItemOrDefault(name: string, def: any, pre_parse_mutator?: Cal
         if (!item)
             item = def
     } catch (e) {
+        item = def;
         console.error(e);
     }
 
