@@ -7,6 +7,10 @@ function getLocalSpendingResponse(): SpendingResponse {
     return getStorageItemOrDefault(LOCAL_STORAGE.spendingResponse, {});
 }
 
+function getSpendingCounter(): number {
+    return getStorageItemOrDefault(LOCAL_STORAGE.localSpendingCount, {spendingCount: 0});
+}
+
 function recordSpending(spending: Spending) {
     const spendingResponse: SpendingResponse = getLocalSpendingResponse();
     const date = dateToYYMM(spending.date);
@@ -25,4 +29,4 @@ async function recordUnsentSpendingsInAPI() {
 
 }
 
-export {recordSpending, recordUnsentSpendingsInAPI, getLocalSpendingResponse};
+export {recordSpending, recordUnsentSpendingsInAPI, getLocalSpendingResponse, getSpendingCounter};
