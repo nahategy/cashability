@@ -21,5 +21,7 @@ export type SpendingResponse = {
     [key: string]: Spending[]
 }
 
-export type SpendingType = {}
-export type SpendingTypeResponse = [SpendingType]
+export type SpendingType = {
+    name: string
+}
+export type SpendingTypeResponse = { [n: number]: unknown }
