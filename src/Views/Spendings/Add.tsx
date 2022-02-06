@@ -6,7 +6,7 @@ import {Spending as SpendingType} from "../../Types";
 import {RootState} from "../../store";
 import {getNew} from "../../GlobalState/LocalSpendingCountSlice";
 import {Box, Button, TextField} from "@mui/material";
-import {dateToFormattedDateString} from "../../Utils";
+import {dateToFormattedDateTimeString} from "../../Utils";
 
 function Add() {
     const navigate = useNavigate();
@@ -25,16 +25,17 @@ function Add() {
         var spendingDate = date;
         if (!spendingDate) {
             console.log("setting default date");
-            spendingDate = dateToFormattedDateString(new Date());
+            spendingDate = dateToFormattedDateTimeString(new Date());
+        } else {
+            spendingDate = dateToFormattedDateTimeString(new Date(spendingDate))
         }
-
         const sp: SpendingType = {
             "name": name,
             "amount": parseFloat(amount),
             "date": spendingDate,
             "id": localSpendingCount.spendingCount + ""
         };
-
+        // console.log(sp)
         dispatch(add(sp))
         dispatch(getNew())
 
@@ -64,7 +65,7 @@ function Add() {
                     value={date}
                     helperText={"Enter the date of the Spending ( If left empty, it will be the current date ) "}
                     onChange={(ev) => setDate(ev.target.value)}
-                    type={"date"}
+                    type={"datetime-local"}
                 >
                 </TextField>
 

@@ -2,6 +2,11 @@ function stringToFormattedDateString(val: string) {
     return dateToFormattedDateString(new Date(val))
 }
 
+function dateToFormattedDateTimeString(val: Date) {
+    return val.toISOString().replace('T', ' ').replace('Z','')
+
+}
+
 function dateToFormattedDateString(val: Date) {
     return val.toISOString().split('T')[0];
 }
@@ -20,4 +25,11 @@ function getCurrentYYMM() {
     return dateToYYMM(new Date())
 }
 
-export {stringToFormattedDateString, dateToYYMM, getCurrentYYMM, stringToDate, dateToFormattedDateString};
+export {
+    stringToFormattedDateString,
+    dateToYYMM,
+    getCurrentYYMM,
+    stringToDate,
+    dateToFormattedDateString,
+    dateToFormattedDateTimeString
+};
