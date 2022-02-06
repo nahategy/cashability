@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import '@fontsource/roboto/300.css';
 
 import './App.css';
-import LoadingBar from "./Components/LoadingBar";
+import LoadinglFloatButton from "./Components/LoadingBar";
 import Menu from "./Components/Menu";
 import {getLocalSpendingResponse, recordUnsentSpendingsInAPI} from "./Services/Spendings";
 import {set} from "./GlobalState/SpendingSlice";
@@ -31,7 +31,7 @@ function App() {
 
     return (
         <div>
-            {!isUnRecordedSpendingsSentToAPI ? (<LoadingBar/>) : ""}
+            {!isUnRecordedSpendingsSentToAPI ? (<LoadinglFloatButton/>) : ""}
             <Router>
                 <div className="page">
                     <Routing/>
