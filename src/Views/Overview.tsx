@@ -34,17 +34,20 @@ function Overview() {
         })
         return sum;
     }
-
+    let spendingTypeSum = 0;
     return (
         <>
             <Card sx={{mb: 1.5}}>
                 <CardContent>
                     <Grid display="grid" container spacing={1}>
                         {spendingTypes.map((spendingType: SpendingType, index: number) => (
-                            <Grid item key={index}>
-                                {spendingType.name}:
-                                {sumSpendingsByType(spendingType.name, sortedSpendings)}
-                            </Grid>
+                            (spendingTypeSum = sumSpendingsByType(spendingType.name, sortedSpendings)) > 0 ?
+                                <Grid item key={index}>
+                                    {spendingType.name}:
+                                    {spendingTypeSum}
+                                </Grid>
+                                : null
+
                         ))}
                         <Grid item>
                             <hr/>
