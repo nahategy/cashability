@@ -24,7 +24,10 @@ export type SpendingResponse = {
 export type SpendingType = {
     name: string
 }
-export type SpendingTypeResponse = { [n: number]: unknown }
+export type SpendingTypeResponse = {
+    [n: number]: SpendingType
+    map(spendingType: SpendingType): any;
+}
 
 export type  SpendingCountResponse = {
     spendingCount: number

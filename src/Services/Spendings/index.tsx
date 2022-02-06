@@ -1,5 +1,5 @@
 import {LOCAL_STORAGE} from "../../Constants";
-import {Spending, SpendingCountResponse, SpendingResponse} from "../../Types";
+import {Spending, SpendingCountResponse, SpendingResponse, SpendingTypeResponse} from "../../Types";
 import {dateToYYMM} from "../../Utils";
 import {getStorageItemOrDefault, storeItem} from "../LocalStorage";
 
@@ -9,6 +9,10 @@ function getLocalSpendingResponse(): SpendingResponse {
 
 function getSpendingCounter(): SpendingCountResponse {
     return getStorageItemOrDefault(LOCAL_STORAGE.localSpendingCount, {spendingCount: 0});
+}
+
+function getSpendingTypes(): SpendingTypeResponse {
+    return getStorageItemOrDefault(LOCAL_STORAGE.spendingTypeResponse, []);
 }
 
 function recordSpending(spending: Spending) {
@@ -29,4 +33,4 @@ async function recordUnsentSpendingsInAPI() {
 
 }
 
-export {recordSpending, recordUnsentSpendingsInAPI, getLocalSpendingResponse, getSpendingCounter};
+export {recordSpending, recordUnsentSpendingsInAPI, getLocalSpendingResponse, getSpendingCounter, getSpendingTypes};

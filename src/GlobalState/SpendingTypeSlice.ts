@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {Spending, SpendingTypeResponse} from "../Types";
+import {getSpendingTypes} from "../Services/Spendings";
 
 type SpendingTypePayload = {
     payload: Spending
@@ -12,7 +13,7 @@ type SpendingTypeResponsePayload = {
 export const SpendingTypeSlice = createSlice({
     name: 'spendingsType',
     initialState: {
-        spendingTypeResponse: [] as SpendingTypeResponse
+        spendingTypeResponse: getSpendingTypes()
     },
 
     reducers: {

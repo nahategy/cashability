@@ -7,6 +7,7 @@ const API_ROUTES = {
 };
 const LOCAL_STORAGE = {
     "spendingResponse": "spendingResponse",
+    "spendingTypeResponse": "spendingTypeResponse",
     "localSpendingCount": "localSpendingCount"
 };
 
