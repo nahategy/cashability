@@ -17,7 +17,7 @@ function getSpendingTypes(): SpendingTypeResponse {
 
 function recordSpending(spending: Spending) {
     const spendingResponse: SpendingResponse = getLocalSpendingResponse();
-    const date = dateToYYMM(spending.date);
+    const date = dateToYYMM(new Date(spending.date));
     if (!spendingResponse[date])
         spendingResponse[date] = []
     spendingResponse[date].push(spending)

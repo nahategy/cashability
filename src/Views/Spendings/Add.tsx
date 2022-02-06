@@ -6,12 +6,13 @@ import {Spending as SpendingType} from "../../Types";
 import {RootState} from "../../store";
 import {getNew} from "../../GlobalState/LocalSpendingCountSlice";
 import {Box, Button, TextField} from "@mui/material";
+import {dateToFormattedDateString} from "../../Utils";
 
 function Add() {
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [amount, setAmount] = useState("0");
-    const [date, setDate] = useState(undefined as any);
+    const [date, setDate] = useState("");
 
     const dispatch = useDispatch();
     const localSpendingCount = useSelector((state: RootState) => state.localSpendingCount.localSpendingCount)
@@ -22,9 +23,9 @@ function Add() {
         setRecording(true);
 
         var spendingDate = date;
-        if (spendingDate === undefined) {
+        if (!spendingDate) {
             console.log("setting default date");
-            spendingDate = new Date();
+            spendingDate = dateToFormattedDateString(new Date());
         }
 
         const sp: SpendingType = {
@@ -33,6 +34,7 @@ function Add() {
             "date": spendingDate,
             "id": localSpendingCount.spendingCount + ""
         };
+
         dispatch(add(sp))
         dispatch(getNew())
 

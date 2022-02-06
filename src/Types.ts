@@ -1,7 +1,7 @@
 export type Spending = {
     name: string,
     amount: number,
-    date: Date
+    date: string
     id: string
     type?: any,
 }

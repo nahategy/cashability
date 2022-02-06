@@ -1,5 +1,9 @@
 function stringToFormattedDateString(val: string) {
-    return new Date(val).toISOString().split('T')[0];
+    return dateToFormattedDateString(new Date(val))
+}
+
+function dateToFormattedDateString(val: Date) {
+    return val.toISOString().split('T')[0];
 }
 
 function stringToDate(val: string): Date {
@@ -16,4 +20,4 @@ function getCurrentYYMM() {
     return dateToYYMM(new Date())
 }
 
-export {stringToFormattedDateString, dateToYYMM, getCurrentYYMM, stringToDate};
+export {stringToFormattedDateString, dateToYYMM, getCurrentYYMM, stringToDate, dateToFormattedDateString};

@@ -22,7 +22,7 @@ export const SpendingSlice = createSlice({
         },
         add: (state, action: SpendingPayload) => {
             // state.spendings.
-            const spendingDate: string = dateToYYMM(action.payload.date);
+            const spendingDate: string = dateToYYMM(new Date(action.payload.date));
             if (!state.spendingResponse[spendingDate])
                 state.spendingResponse[spendingDate] = [];
             state.spendingResponse[spendingDate].push(action.payload)
