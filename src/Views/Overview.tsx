@@ -2,6 +2,8 @@ import {useSelector} from "react-redux";
 import {RootState} from "../store";
 import {Spending, SpendingResponse, SpendingType, SpendingTypeResponse} from "../Types";
 import {getCurrentYYMM} from "../Utils";
+import {Box, Card, CardContent, Paper, Typography} from "@mui/material";
+import SpendingCard from "../Components/Spending/SpendingCard";
 
 function Overview() {
     const spendingResponse: SpendingResponse = useSelector((state: RootState) => state.spendingResponse.spendingResponse)
@@ -17,24 +19,41 @@ function Overview() {
         return 0;
     })
 
-    return (
-        <div>
-            <div>
-                {spendingTypes.map((spendingType: SpendingType) => (
-                    <div>
-                        {spendingType.name}
-                    </div>
-                ))}
-            </div>
-            <ul>
-                {sortedSpendings.slice(0, 3).map(spending => (
-                    <li key={spending.id}>
-                        <b>{spending.type}</b> {spending.name}: {spending.amount}
-                    </li>
-                ))}
-            </ul>
+    const sumSpendingsByType = (type: string, spendings: Spending[]): number => {
+        let sum = 0;
+        spendings.forEach((spending: Spending) => {
+            if (spending.type === type)
+                sum += spending.amount;
+        })
+        return sum;
+    }
+    const sumSpendings = (spendings: Spending[]): number => {
+        let sum = 0;
+        spendings.forEach((spending: Spending) => {
+            sum += spending.amount;
+        })
+        return sum;
+    }
 
-        </div>
+    return (
+        <>
+            <Card sx={{mb:1.5}}>
+                <CardContent>
+                    {spendingTypes.map((spendingType: SpendingType) => (
+                        <div>
+                            {spendingType.name}
+                            {sumSpendingsByType(spendingType.name, sortedSpendings)}
+                        </div>
+                    ))}
+                    Sum: {sumSpendings(sortedSpendings)}
+                </CardContent>
+            </Card>
+
+            {sortedSpendings.slice(0, 3).map(spending => (
+                <SpendingCard key={spending.id} spending={spending}/>
+            ))}
+
+        </>
     )
 
 }
