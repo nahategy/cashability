@@ -5,6 +5,7 @@ import {add} from "../../GlobalState/SpendingSlice";
 import {Spending as SpendingType} from "../../Types";
 import {RootState} from "../../store";
 import {getNew} from "../../GlobalState/LocalSpendingCountSlice";
+import {Box, Button, TextField} from "@mui/material";
 
 function Add() {
     const navigate = useNavigate();
@@ -40,30 +41,40 @@ function Add() {
 
     return (
         <form action="">
-            <label>
-                Name
-                <input type="text" placeholder={"name"} value={name} onChange={function (ev) {
-                    setName(ev.target.value)
-                }} required/>
-            </label>
-            <label>
-                Amount
-                <input type="number" min={0} placeholder={"name"} value={amount} onChange={function (ev) {
-                    setAmount(ev.target.value)
-                }} required/>
-            </label>
-            <label>
-                Date
-                <input type="date" placeholder={"date"} value={date} onChange={function (ev) {
-                    setDate(ev.target.value)
-                }} required/>
-            </label>
-            <button disabled={recording || name.trim() == '' || amount.trim() == '' || parseFloat(amount) == 0}
-                    type={"button"}
+            <Box sx={{display: "grid", gridTemplateRows: 'repeat(3, 2fr)', gap: 2}}>
+                <TextField
+                    color="primary"
+                    label="Name"
+                    value={name}
+                    helperText={"Enter the name of the Spending"}
+                    onChange={(ev) => setName(ev.target.value)}
+                >
+                </TextField>
+                <TextField
+                    label="Amount"
+                    value={amount}
+                    type={"number"}
+                    helperText={"Enter the amount of the Spending"}
+                    onChange={(ev) => setAmount(ev.target.value)}
+                >
+                </TextField>
+                <TextField
+                    value={date}
+                    helperText={"Enter the date of the Spending ( If left empty, it will be the current date ) "}
+                    onChange={(ev) => setDate(ev.target.value)}
+                    type={"date"}
+                >
+                </TextField>
+
+                <Button
+                    disabled={recording || name.trim() == '' || amount.trim() == '' || parseFloat(amount) == 0}
+                    variant={"outlined"}
                     onClick={RecordSpending}
-            >
-                Record
-            </button>
+                >
+                    Record
+                </Button>
+            </Box>
+
         </form>
     )
 }
