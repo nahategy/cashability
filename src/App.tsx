@@ -33,10 +33,10 @@ function App() {
         <div>
             {!isUnRecordedSpendingsSentToAPI ? (<LoadingBar/>) : ""}
             <Router>
-                <Menu/>
                 <div className="page">
                     <Routing/>
                 </div>
+                <Menu/>
             </Router>
         </div>
     )
