@@ -13,9 +13,9 @@ function Overview() {
     let sortedSpendings: Spending[] = [...spendings];
     sortedSpendings.sort((a: Spending, b: Spending) => {
         if (a.date < b.date)
-            return -1;
-        if (a.date > b.date)
             return 1;
+        if (a.date > b.date)
+            return -1;
         return 0;
     })
 
