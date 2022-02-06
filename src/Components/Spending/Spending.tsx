@@ -1,7 +1,7 @@
 import {Spending} from "../../Types";
 import {stringToFormattedDateString} from "../../Utils";
 import {TableCell, TableRow} from "@mui/material";
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 export interface SpendingItemProps {
     spending: Spending;
@@ -27,7 +27,7 @@ function SpendingItem(props: SpendingItemProps) {
     return (
         <TableRow>
             <TableCell>
-                <div onClick={removeSpending}>Remove</div>
+                <DeleteForeverIcon onClick={removeSpending}/>
             </TableCell>
             <TableCell>{spending.id}</TableCell>
             <TableCell>{spending.name}</TableCell>
