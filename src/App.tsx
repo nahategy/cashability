@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
 import {BrowserRouter as Router} from "react-router-dom";
 import Routing from "./Components/Routing";
+import {useDispatch} from "react-redux";
+import '@fontsource/roboto/300.css';
+
+import './App.css';
 import LoadingBar from "./Components/LoadingBar";
 import Menu from "./Components/Menu";
 import {getLocalSpendingResponse, recordUnsentSpendingsInAPI} from "./Services/Spendings";
-import {useDispatch} from "react-redux";
 import {set} from "./GlobalState/SpendingSlice";
 
 // import {SpendingRecordContext} from "./Contexts/SpendingRecords";
