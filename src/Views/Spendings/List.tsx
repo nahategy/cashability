@@ -5,6 +5,7 @@ import {Spending} from "../../Types";
 import {useParams} from "react-router-dom";
 import {getCurrentYYMM} from "../../Utils";
 import {remove} from "../../GlobalState/SpendingSlice";
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 
 export type ListUrlParameters = {
     date?: string
@@ -24,10 +25,28 @@ function List() {
 
     return (
         <div>
-            {spendings && spendings.length > 0 ? spendings.map((value) => (
-                <SpendingItem spending={value} remove={removeSpending} key={value.id}/>
-            )) : `No spending for the date of ${date}`
-            }
+            <TableContainer component={Paper}>
+                <Table sx={{minWidth: 650}} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Actions</TableCell>
+                            <TableCell>ID</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell align={"right"}>Amount</TableCell>
+                            <TableCell>Date</TableCell>
+                            <TableCell>Synced</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            spendings && spendings.length > 0 ? spendings.map((value) => (
+                                <SpendingItem spending={value} remove={removeSpending} key={value.id}/>
+                            )) : `No spending for the date of ${date}`
+                        }
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
         </div>
     )
 }

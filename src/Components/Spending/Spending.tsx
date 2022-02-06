@@ -1,5 +1,6 @@
 import {Spending} from "../../Types";
 import {stringToFormattedDateString} from "../../Utils";
+import {TableCell, TableRow} from "@mui/material";
 
 
 export interface SpendingItemProps {
@@ -24,14 +25,16 @@ function SpendingItem(props: SpendingItemProps) {
         return false;
     }
     return (
-        <div>
-            <div onClick={removeSpending}>Remove</div>
-            <span>ID: {spending.id},</span>
-            <span>Name: {spending.name},</span>
-            <span>Amount: {spending.amount},</span>
-            <span>Date: {spending.date ? stringToFormattedDateString(`${spending.date}`) : ""},</span>
-            <span>Synced: {isSynced(spending) ? "Y" : "N"}</span>
-        </div>
+        <TableRow>
+            <TableCell>
+                <div onClick={removeSpending}>Remove</div>
+            </TableCell>
+            <TableCell>{spending.id}</TableCell>
+            <TableCell>{spending.name}</TableCell>
+            <TableCell align={"right"}>{spending.amount}</TableCell>
+            <TableCell>{spending.date ? stringToFormattedDateString(`${spending.date}`) : ""}</TableCell>
+            <TableCell>{isSynced(spending) ? "Y" : "N"}</TableCell>
+        </TableRow>
     )
 }
 
