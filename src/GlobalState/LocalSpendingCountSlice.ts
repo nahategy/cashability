@@ -11,7 +11,7 @@ export const LocalSpendingCountSlice = createSlice({
 
     reducers: {
         getNew: (state) => {
-            state.localSpendingCount--;
+            state.localSpendingCount.spendingCount = state.localSpendingCount.spendingCount - 1;
         }
     }
 });

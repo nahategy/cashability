@@ -1,8 +1,10 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {add} from "../../GlobalState/SpendingSlice";
 import {Spending as SpendingType} from "../../Types";
+import {RootState} from "../../store";
+import {getNew} from "../../GlobalState/LocalSpendingCountSlice";
 
 function Add() {
     const navigate = useNavigate();
@@ -11,6 +13,7 @@ function Add() {
     const [date, setDate] = useState(undefined as any);
 
     const dispatch = useDispatch();
+    const localSpendingCount = useSelector((state: RootState) => state.localSpendingCount.localSpendingCount)
 
     const [recording, setRecording] = useState(false);
 
@@ -24,9 +27,14 @@ function Add() {
         }
 
         const sp: SpendingType = {
-            "name": name, "amount": parseFloat(amount), "date": spendingDate
+            "name": name,
+            "amount": parseFloat(amount),
+            "date": spendingDate,
+            "id": localSpendingCount.spendingCount + ""
         };
         dispatch(add(sp))
+        dispatch(getNew())
+
         navigate("/");
     };
 

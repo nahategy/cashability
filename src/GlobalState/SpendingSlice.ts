@@ -4,7 +4,7 @@ import {dateToYYMM, stringToDate} from "../Utils";
 import {getLocalSpendingResponse,} from "../Services/Spendings";
 
 type SpendingPayload = {
-    payload: Spending
+    payload: Spending,
 };
 
 type SpendingResponsePayload = {
@@ -16,17 +16,12 @@ export const SpendingSlice = createSlice({
     initialState: {
         spendingResponse: getLocalSpendingResponse(),
     },
-
     reducers: {
         set: (state, action: SpendingResponsePayload) => {
             state.spendingResponse = action.payload
         },
         add: (state, action: SpendingPayload) => {
             // state.spendings.
-            if (!action.payload.id) {
-                // state.spendingCounter--;
-                // action.payload.id = state.spendingCounter + ""
-            }
             const spendingDate: string = dateToYYMM(action.payload.date);
             if (!state.spendingResponse[spendingDate])
                 state.spendingResponse[spendingDate] = [];

@@ -1,5 +1,5 @@
 import {LOCAL_STORAGE} from "../../Constants";
-import {Spending, SpendingResponse} from "../../Types";
+import {Spending, SpendingCountResponse, SpendingResponse} from "../../Types";
 import {dateToYYMM} from "../../Utils";
 import {getStorageItemOrDefault, storeItem} from "../LocalStorage";
 
@@ -7,7 +7,7 @@ function getLocalSpendingResponse(): SpendingResponse {
     return getStorageItemOrDefault(LOCAL_STORAGE.spendingResponse, {});
 }
 
-function getSpendingCounter(): number {
+function getSpendingCounter(): SpendingCountResponse {
     return getStorageItemOrDefault(LOCAL_STORAGE.localSpendingCount, {spendingCount: 0});
 }
 
