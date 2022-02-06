@@ -13,6 +13,7 @@ function Add() {
     const [name, setName] = useState("");
     const [amount, setAmount] = useState("0");
     const [date, setDate] = useState("");
+    const [type, setType] = useState("other");
 
     const dispatch = useDispatch();
     const localSpendingCount = useSelector((state: RootState) => state.localSpendingCount.localSpendingCount)
@@ -29,11 +30,13 @@ function Add() {
         } else {
             spendingDate = dateToFormattedDateTimeString(new Date(spendingDate))
         }
+
         const sp: SpendingType = {
             "name": name,
             "amount": parseFloat(amount),
             "date": spendingDate,
-            "id": localSpendingCount.spendingCount + ""
+            "id": localSpendingCount.spendingCount + "",
+            "type": type
         };
         // console.log(sp)
         dispatch(add(sp))
