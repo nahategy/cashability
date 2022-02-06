@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../store";
 import {Spending, SpendingResponse, SpendingType, SpendingTypeResponse} from "../Types";
 import {getCurrentYYMM} from "../Utils";
-import {Box, Card, CardContent, Paper, Typography} from "@mui/material";
+import {Box, Card, CardContent, Grid, Paper, Typography} from "@mui/material";
 import SpendingCard from "../Components/Spending/SpendingCard";
 
 function Overview() {
@@ -37,15 +37,20 @@ function Overview() {
 
     return (
         <>
-            <Card sx={{mb:1.5}}>
+            <Card sx={{mb: 1.5}}>
                 <CardContent>
-                    {spendingTypes.map((spendingType: SpendingType) => (
-                        <div>
-                            {spendingType.name}
-                            {sumSpendingsByType(spendingType.name, sortedSpendings)}
-                        </div>
-                    ))}
-                    Sum: {sumSpendings(sortedSpendings)}
+                    <Grid display="grid" container spacing={1}>
+                        {spendingTypes.map((spendingType: SpendingType, index: number) => (
+                            <Grid item key={index}>
+                                {spendingType.name}:
+                                {sumSpendingsByType(spendingType.name, sortedSpendings)}
+                            </Grid>
+                        ))}
+                        <Grid item>
+                            <hr/>
+                            Sum: {sumSpendings(sortedSpendings)}
+                        </Grid>
+                    </Grid>
                 </CardContent>
             </Card>
 
